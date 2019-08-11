@@ -22,5 +22,5 @@ You must configure webhook or LINE Notify on chat services, get token text and a
 Usage
 -----
 
-/path/to/chkmdstat.sh [boot]
-- boot: initialize option.
+/path/to/chkmdstat.sh [init]
+- init: initialize option.
