@@ -5,7 +5,7 @@
 FLAGFILE="/tmp/mdflag"
 #SLACKURI is uri for webhook.
 #You can get uri via your slack app page.
-SLACKURI=''
+SLACKURI='INPUT HERE'
 #LINETOKEN is token for LINE notify.
 #You can get token via your LINE notify account page.
 LINETOKEN="INPUT HERE"
