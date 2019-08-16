@@ -3,9 +3,9 @@
 #--- Modify here ---
 #FLAGFILE is prevent for send message repeatedly.
 FLAGFILE="/tmp/mdflag"
-#SLACKURI is uri for webhook.
-#You can get uri via your slack app page.
-SLACKURI='INPUT HERE'
+#SLACKURL is url for webhook.
+#You can get url via your slack app page
+SLACKURL="NPUT HERE"
 #LINETOKEN is token for LINE notify.
 #You can get token via your LINE notify account page.
 LINETOKEN="INPUT HERE"
@@ -43,24 +43,24 @@ fi
 touch $FLAGFILE
 
 #Slack
-if [ $SLACKURI != "INPUT HERE" ]; then
-	curl -f -X POST --data-urlencode "payload={ \"username\": \”chkmdstat\”, \"text\": \”$HOSTNAME: $MESSAGE\” "}" $SLACKURI
+if [ "$SLACKURL" != 'INPUT HERE' ]; then
+	curl -f -X POST --data-urlencode "payload={ \"username\": \"chkmdstat\", \"text\": \"$HOSTNAME: $MESSAGE\" }" $SLACKURL
 	if [ $? -gt 0 ]; then
 		rm $FLAGFILE
 	fi
 fi
 
 #LINE Notify
-if [ $LINETOKEN != "INPUT HERE" ]; then
+if [ "$LINETOKEN" != "INPUT HERE" ]; then
 	curl -f -X POST -H "Authorization: Bearer $LINETOKEN" -F "message=$HOSTNAME: $MESSAGE" https://notify-api.line.me/api/notify
-		if [ $? -gt 0 ]; then
+	if [ $? -gt 0 ]; then
 		rm $FLAGFILE
 	fi
 fi
 
 #Tocaro
-if [ $TOKAROTOKEN != "INPUT HERE" ]; then
-	curl -f -X POST -H "Content-type: application/json" --data "{\"text\": \"$HOSTNAME: $MESSAGE\" "}" https://hooks.tocaro.im/integrations/inbound_webhook/$TOCAROTOKEN
+if [ "$TOKAROTOKEN" != "INPUT HERE" ]; then
+	curl -f -X POST -H "Content-type: application/json" --data "{\"text\": \"$HOSTNAME: $MESSAGE\" }" https://hooks.tocaro.im/integrations/inbound_webhook/$TOCAROTOKEN
 	if [ $? -gt 0 ]; then
 		rm $FLAGFILE
 	fi
