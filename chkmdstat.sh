@@ -33,8 +33,8 @@ if [ -e $FLAGFILE ]; then
 fi
 
 #for debug
-MDSTAT=`cat ~/mdstat-d.txt | grep -c _`
-#MDSTAT=`cat /proc/mdstat | grep -c _`
+#MDSTAT=`cat ~/mdstat-d.txt | grep -c _`
+MDSTAT=`cat /proc/mdstat | grep -c _`
 
 if [ $MDSTAT = "0" ]; then
 	exit 0
@@ -60,7 +60,7 @@ fi
 
 #Tocaro
 if [ "$TOKAROTOKEN" != "INPUT HERE" ]; then
-	curl -f -X POST -H "Content-type: application/json" --data "{\"text\": \"$HOSTNAME: $MESSAGE\" }" https://hooks.tocaro.im/integrations/inbound_webhook/$TOCAROTOKEN
+	curl -f -X POST -H "Content-type: application/json" --data "{ \"text\": \"$HOSTNAME: $MESSAGE\" }" https://hooks.tocaro.im/integrations/inbound_webhook/$TOCAROTOKEN
 	if [ $? -gt 0 ]; then
 		rm $FLAGFILE
 	fi
